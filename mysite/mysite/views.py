@@ -19,6 +19,21 @@ def analyze(request):
     #print(djtext)
 
     #check which checkbox is on
+    if(removepunc == "on" and fullcaps=="on"):
+        punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+        analyzed = ""
+        for char in djtext:
+            if char not in punctuations:
+                analyzed = analyzed + char
+        djtext = analyzed
+        final = ""
+        for char in djtext:
+            final = final + char.upper()
+
+        params = {'given_word': 'Removed Punctuations and Changed to Uppercase', 'analyzed_text': final}
+        djtext = final
+        return render(request, 'analyze.html',params)
+
     if removepunc == "on":
         punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
         analyzed = ""
@@ -26,27 +41,31 @@ def analyze(request):
             if char not in punctuations:
                 analyzed = analyzed + char
         params = {'given_word':'Removed Punctuations', 'analyzed_text': analyzed}
+        djtext = analyzed
         #Analyze the text
         return render(request, 'analyze.html',params)
     
-    elif fullcaps == "on":
-        analyzed = ""
-        for char in djtext:
-            if char !="\n" and char!="\r":
-
-                analyzed = analyzed + char
-                params = {'given_word':'Changed to Upper Case', 'analyzed_text': analyzed}
-    
-    elif newlineremover == "on":
+    elif(fullcaps=="on"):
         analyzed = ""
         for char in djtext:
             analyzed = analyzed + char.upper()
-            params = {'given_word':'New Line Removed', 'analyzed_text': analyzed}        
 
-    else:
-        params = {'given_word':'Removed Punctuations', 'analyzed_text': djtext}
-        #Analyze the text
+        params = {'given_word': 'Changed to Uppercase', 'analyzed_text': analyzed}
+        djtext = analyzed
         return render(request, 'analyze.html',params)
+
+    elif newlineremover == "on":
+        analyzed = ""
+        for char in djtext:
+            if char != "\n" and char!="\r":
+                analyzed = analyzed + char
+
+        params = {'given_word': 'Removed NewLines', 'analyzed_text': analyzed}    
+    
+    
+
+    if(removepunc != "on" and fullcaps!="on"):
+        return HttpResponse("please select any operation and try again")
 
 def about(request):
     return render(request, 'about.html')

@@ -16,7 +16,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">TextUtils.bd</a>
+        <a class="navbar-brand" href="#">vogichogi.com</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,38 +49,13 @@
         </form>
     </nav>
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Welcome!</strong> You should check in on some of those fields below.
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> Your text couldn't be analyzed.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
 
-    <div class="container">
-
-        <form action='/analyze' method='post'> {% csrf_token %}
-
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Enter your text here.</label>
-                <textarea class="form-control" name='text' id="exampleFormControlTextarea1" rows="5"></textarea>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" name="removepunc" type="checkbox" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-              Remove Punctuations
-            </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" name="fullcaps" type="checkbox" id="defaultCheck2">
-                <label class="form-check-label" for="defaultCheck2">
-              UPPERCASE
-            </label>
-            </div>
-
-            <button type="submit" class="btn btn-primary mt-2">Analyze Text</button>
-        </form>
-    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
